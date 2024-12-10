@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Преподавательская панель</title>
+<link rel="stylesheet" href="styles.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_TRACKING_ID"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'YOUR_TRACKING_ID');
+</script>
+</head>
+<body>
+    <header>
+        <h1>Преподавательская панель</h1>
+        <nav>
+            <a href="index.html">Главная</a>
+            <a href="course.html">Курсы</a>
+            <a href="feedback.html">Обратная связь</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Добавить новый курс</h2>
+        <form>
+            <label for="courseName">Название курса:</label>
+            <input type="text" id="courseName" required><br>
+            <label for="courseDescription">Описание курса:</label>
+            <textarea id="courseDescription" required></textarea><br>
+            <button type="submit">Добавить курс</button>
+        </form>
+    </main>
+</body>
+</html>
