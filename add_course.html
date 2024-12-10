@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить курс</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Функция для сохранения нового курса в LocalStorage
+        function addCourse() {
+            const title = document.getElementById('title').value;
+            const description = document.getElementById('description').value;
+            const course = { title, description };
+
+            let courses = JSON.parse(localStorage.getItem('courses')) || [];
+            courses.push(course);
+            localStorage.setItem('courses', JSON.stringify(courses));
+
+            alert('Курс добавлен!');
+            document.getElementById('courseForm').reset();
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Добавить новый курс</h1>
+        <nav>
+            <a href="index.html">Главная</a>
+            <a href="course.html">Курсы</a>
+            <a href="login.html">Вход</a>
+            <a href="feedback.html">Обратная связь</a>
+        </nav>
+    </header>
+    <main>
+        <form id="courseForm" onsubmit="event.preventDefault(); addCourse();">
+            <label for="title">Название курса:</label>
+            <input type="text" id="title" required>
+            
+            <label for="description">Описание курса:</label>
+            <textarea id="description" required></textarea>
+            
+            <button type="submit">Добавить курс</button>
+        </form>
+    </main>
+</body>
+</html>

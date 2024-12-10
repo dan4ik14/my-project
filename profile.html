@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        window.onload = function() {
+            const user = JSON.parse(localStorage.getItem('loggedInUser'));
+            if (user) {
+                document.getElementById('username').value = user.username;
+                document.getElementById('email').innerText = user.email;
+            } else {
+                alert('Сначала войдите в систему.');
+                window.location.href = 'login.html';
+            }
+        };
+
+        function updateProfile() {
+            const newName = document.getElementById('username').value;
+            const newPassword = document.getElementById('password').value;
+
+            let users = JSON.parse(localStorage.getItem('users'));
+            let user = JSON.parse(localStorage.getItem('loggedInUser'));
+
+            users = users.map(u => {
+                if (u.email === user.email) {
+                    return { ...u, username: newName, password: newPassword || u.password };
+                }
+                return u;
+            });
+
+            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem('loggedInUser', JSON.stringify({ ...user, username: newName }));
+
+            alert('Профиль обновлен!');
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Профиль пользователя</h1>
+        <nav>
+            <a href="index.html">Главная</a>
+            <a href="course.html">Курсы</a>
+            <a href="logout.html" onclick="logoutUser()">Выйти</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Информация</h2>
+        <p>Email: <span id="email"></span></p>
+
+        <h2>Обновить профиль</h2>
+        <form onsubmit="event.preventDefault(); updateProfile();">
+            <label for="username">Имя пользователя:</label>
+            <input type="text" id="username" required>
+            
+            <label for="password">Новый пароль (необязательно):</label>
+            <input type="password" id="password">
+            
+            <button type="submit">Сохранить изменения</button>
+        </form>
+    </main>
+</body>
+</html>
